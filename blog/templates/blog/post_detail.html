@@ -1,0 +1,30 @@
+{% extends "blog/layout.html" %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    {{ post.content|linebreaks }}
+    
+    <hr/>
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in post.comment_set.all %}
+        <li>
+            {{ comment.message }}
+            <small>
+                by {{ comment.author }}
+            </small>
+            <small>
+                at {{ comment.updated_at }}
+            </small>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr/>
+    <a href="{% url "blog:post_list" %}" class="btn btn-primary">글 목록</a>
+
+{% endblock %}

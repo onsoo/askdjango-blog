@@ -1,0 +1,53 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>Django Template
+            <sup>by AskDjango</sup>
+        </h1>
+        <p>여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="http://facebook.com/groups/askdjango">
+                AskDjango 페이스북 그룹 &raquo;
+            </a>
+        </p>
+    </div>
+    <p>
+        <form action="" method="get">
+            <input type="text", name="q" value="{{ q }}" />
+            <input type="submit" value="검색" class="btn btn-primary">
+        </form>
+    </p>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>title</td>
+                <td>author</td>
+                <td>updated_at</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in post_list %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a href="{% url "blog:post_detail" post.id %}">{{ post.title }}</a></td>
+            
+                {% comment %}
+                <a href="/blog/{{ post.id }}">
+                    {{ post.title }}
+                </a> {% endcomment %}
+            
+                <td><small>by {{ post.author }} </small></td>
+                <td><small>at {{ post.updated_at}} </small></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+
+{% endblock %}
+
